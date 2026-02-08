@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Readify</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/images/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Readify</a>
+            
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explorer.html">Book Explorer</a></li>
+                <li><a href="tracker.html">Progress Tracker</a></li>
+                <li><a href="recommender.html">Book Recommender</a></li>
+                <li><a href="flow.html">Reading Flow</a></li>
+                <li><a href="feedback.html" class="active">Feedback</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="feedback-container">
+        <div class="container">
+            <header class="feedback-header">
+                <h1 class="page-title">Feedback & Support</h1>
+                <p class="page-subtitle">We'd love to hear your thoughts and suggestions</p>
+            </header>
+
+            <div class="feedback-grid">
+                <!-- Feedback Form -->
+                <div class="feedback-card form-card">
+                    <h2 class="card-title">Send Us Feedback</h2>
+                    
+                    <form class="feedback-form" id="feedback-form" novalidate>
+                        <div class="form-group">
+                            <label for="feedback-name">Your Name *</label>
+                            <input type="text" id="feedback-name" required>
+                            <div class="error-message" id="name-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="feedback-email">Email Address *</label>
+                            <input type="email" id="feedback-email" required>
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="feedback-type">Feedback Type</label>
+                            <select id="feedback-type">
+                                <option value="suggestion">Suggestion</option>
+                                <option value="bug">Bug Report</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="general">General Feedback</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="feedback-message">Your Message *</label>
+                            <textarea id="feedback-message" rows="6" required></textarea>
+                            <div class="error-message" id="message-error"></div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Send Feedback</button>
+                            <button type="reset" class="btn-secondary">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="feedback-card faq-card">
+                    <h2 class="card-title">Frequently Asked Questions</h2>
+                    
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How do I save my reading progress?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>You can save your reading progress on the Progress Tracker page. Fill in the book details and click "Save Progress". Your progress will be stored locally in your browser.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Can I use Readify on multiple devices?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes, you can. but Readify saves data on localStorage making your personal data only usable in a single device</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How are book recommendations generated?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Recommendations can be random or You can filter by genre, length, and mood to get personalized suggestions. The "Surprise Me!" button gives you completely random picks.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How can I report a bug or issue?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Use the feedback form on this page to report any issues. Select "Bug Report" as the feedback type, add details and press send feedback</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confirmation Message -->
+            <div class="confirmation-message" id="confirmation-message">
+                <div class="confirmation-content">
+                    <div class="confirmation-icon">✓</div>
+                    <h3>Thank You!</h3>
+                    <p>Your feedback has been submitted successfully.</p>
+                    <button class="btn-secondary" id="close-confirmation">Close</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Readify</h3>
+                <p>Makes reading fun for all ages</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="explorer.html">Book Explorer</a></li>
+                    <li><a href="tracker.html">Progress Tracker</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="recommender.html">Book Recommender</a></li>
+                    <li><a href="flow.html">Reading Flow</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Readify. Makes reading fun for all ages</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const feedbackForm = document.getElementById('feedback-form');
+            const confirmationMessage = document.getElementById('confirmation-message');
+            const closeConfirmation = document.getElementById('close-confirmation');
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            // FAQ
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.faq-icon');
+                    
+                    this.parentElement.classList.toggle('active');
+                    
+                    if (answer.style.maxHeight) {
+                        answer.style.maxHeight = null;
+                        icon.textContent = '+';
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.textContent = '−';
+                    }
+                    
+                    faqQuestions.forEach(otherQuestion => {
+                        if (otherQuestion !== this) {
+                            const otherAnswer = otherQuestion.nextElementSibling;
+                            const otherIcon = otherQuestion.querySelector('.faq-icon');
+                            const otherItem = otherQuestion.parentElement;
+                            
+                            otherItem.classList.remove('active');
+                            otherAnswer.style.maxHeight = null;
+                            otherIcon.textContent = '+';
+                        }
+                    });
+                });
+            });
+            
+            feedbackForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    submitForm();
+                }
+            });
+
+            const nameInput = document.getElementById('feedback-name');
+            const emailInput = document.getElementById('feedback-email');
+            const messageInput = document.getElementById('feedback-message');
+            
+            nameInput.addEventListener('blur', () => validateField(nameInput, 'name-error'));
+            emailInput.addEventListener('blur', () => validateField(emailInput, 'email-error'));
+            messageInput.addEventListener('blur', () => validateField(messageInput, 'message-error'));
+            
+            closeConfirmation.addEventListener('click', function() {
+                confirmationMessage.classList.remove('active');
+            });
+            
+            function validateForm() {
+                let isValid = true;
+                
+                isValid = validateField(nameInput, 'name-error') && isValid;
+                isValid = validateField(emailInput, 'email-error') && isValid;
+                isValid = validateField(messageInput, 'message-error') && isValid;
+                
+                return isValid;
+            }
+            
+            function validateField(field, errorId) {
+                const errorElement = document.getElementById(errorId);
+                
+                field.classList.remove('error');
+                errorElement.textContent = '';
+                
+                if (!field.value.trim()) {
+                    field.classList.add('error');
+                    errorElement.textContent = 'This field is required';
+                    return false;
+                }
+                
+                if (field.type === 'email') {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value.trim())) {
+                        field.classList.add('error');
+                        errorElement.textContent = 'Please enter a valid email address';
+                        return false;
+                    }
+                }
+                
+                if (field.id === 'feedback-message' && field.value.trim().length < 10) {
+                    field.classList.add('error');
+                    errorElement.textContent = 'Message must be at least 10 characters';
+                    return false;
+                }
+                
+                if (field.id === 'feedback-name' && field.value.trim().length < 2) {
+                    field.classList.add('error');
+                    errorElement.textContent = 'Name must be at least 2 characters';
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            function submitForm() {
+                const formData = {
+                    name: document.getElementById('feedback-name').value,
+                    email: document.getElementById('feedback-email').value,
+                    type: document.getElementById('feedback-type').value,
+                    message: document.getElementById('feedback-message').value,
+                    date: new Date().toISOString(),
+                    id: Date.now()
+                };
+                
+                let feedbackList = JSON.parse(localStorage.getItem('readify_feedback') || '[]');
+                feedbackList.push(formData);
+                localStorage.setItem('readify_feedback', JSON.stringify(feedbackList));
+                
+                confirmationMessage.classList.add('active');
+                feedbackForm.reset();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                setTimeout(() => {
+                    confirmationMessage.classList.remove('active');
+                }, 5000);
+            }
+            
+            const dateFields = document.querySelectorAll('input[type="date"]');
+            dateFields.forEach(field => {
+                if (!field.value) {
+                    field.valueAsDate = new Date();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

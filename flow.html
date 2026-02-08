@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Flow - Readify</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/images/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Readify</a>
+            
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explorer.html">Book Explorer</a></li>
+                <li><a href="tracker.html">Progress Tracker</a></li>
+                <li><a href="recommender.html">Book Recommender</a></li>
+                <li><a href="flow.html" class="active">Reading Flow</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flow-container">
+        <div class="container">
+            <header class="flow-header">
+                <h1 class="page-title">Reading Flow</h1>
+                <p class="page-subtitle">Create the perfect reading environment with ambient sounds</p>
+            </header>
+
+            <div class="flow-grid">
+                <!-- Sound Controls -->
+                <div class="flow-card sounds-card">
+                    <h2 class="card-title">Ambient Sounds</h2>
+                    <p class="card-subtitle">Select sounds to enhance your reading experience</p>
+                    
+                    <div class="sound-controls">
+                        <div class="sound-control">
+                            <div class="sound-info">
+                                <h3>Rain</h3>
+                                <p>Gentle rain sounds</p>
+                            </div>
+                            <div class="sound-toggle">
+                                <input type="checkbox" id="rain-sound" class="sound-checkbox">
+                                <label for="rain-sound" class="sound-slider"></label>
+                            </div>
+                            <div class="sound-volume">
+                                <input type="range" class="volume-slider" id="rain-volume" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                        
+                        <div class="sound-control">
+                            <div class="sound-info">
+                                <h3>Rainforest</h3>
+                                <p>A Morning in the Rainforest</p>
+                            </div>
+                            <div class="sound-toggle">
+                                <input type="checkbox" id="rainforest-sound" class="sound-checkbox">
+                                <label for="rainforest-sound" class="sound-slider"></label>
+                            </div>
+                            <div class="sound-volume">
+                                <input type="range" class="volume-slider" id="rainforest-volume" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                        
+                        <div class="sound-control">
+                            <div class="sound-info">
+                                <h3>Fireplace</h3>
+                                <p>A crackling fireplace</p>
+                            </div>
+                            <div class="sound-toggle">
+                                <input type="checkbox" id="fireplace-sound" class="sound-checkbox">
+                                <label for="fireplace-sound" class="sound-slider"></label>
+                            </div>
+                            <div class="sound-volume">
+                                <input type="range" class="volume-slider" id="fireplace-volume" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sound-master-controls">
+                        <button class="btn-secondary" id="stop-all">Stop All Sounds</button>
+                        <button class="btn-primary" id="preset-quiet">Quiet Preset</button>
+                        <button class="btn-primary" id="preset-cozy">Cozy Preset</button>
+                    </div>
+                </div>
+
+                <!-- Completed Books -->
+                <div class="flow-card completed-card">
+                    <div class="completed-header">
+                        <h2 class="card-title">Completed Books</h2>
+                        <span class="completed-count" id="completed-count">0 books</span>
+                    </div>
+                    
+                    <div class="completed-list" id="completed-list">
+                        <p class="empty-message">No completed books yet. Mark books as 100% completed in the Progress Tracker!</p>
+                    </div>
+                    
+                    <div class="completed-stats">
+                        <div class="stat">
+                            <span class="stat-label">Total Books</span>
+                            <span class="stat-value" id="total-books">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">This Month</span>
+                            <span class="stat-value" id="month-books">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Total Pages</span>
+                            <span class="stat-value" id="total-pages">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Readify</h3>
+                <p>Makes reading fun for all ages</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="explorer.html">Book Explorer</a></li>
+                    <li><a href="tracker.html">Progress Tracker</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="recommender.html">Book Recommender</a></li>
+                    <li><a href="flow.html">Reading Flow</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Readify. Makes reading fun for all ages</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const rainAudio = new Audio('../assets/sounds/rain.wav');
+            const rainforestAudio = new Audio('../assets/sounds/rainforest.mp3');
+            const fireplaceAudio = new Audio('../assets/sounds/fireplace.mp3');
+            
+            // Looping audio
+            rainAudio.loop = true;
+            rainforestAudio.loop = true;
+            fireplaceAudio.loop = true;
+            
+            // All audio is muted at start
+            rainAudio.volume = 0;
+            rainforestAudio.volume = 0;
+            fireplaceAudio.volume = 0;
+            
+            const rainCheckbox = document.getElementById('rain-sound');
+            const rainforestCheckbox = document.getElementById('rainforest-sound');
+            const fireplaceCheckbox = document.getElementById('fireplace-sound');
+            
+            const rainVolume = document.getElementById('rain-volume');
+            const rainforestVolume = document.getElementById('rainforest-volume');
+            const fireplaceVolume = document.getElementById('fireplace-volume');
+            
+            const stopAllBtn = document.getElementById('stop-all');
+            const quietPresetBtn = document.getElementById('preset-quiet');
+            const cozyPresetBtn = document.getElementById('preset-cozy');
+            
+            // Loading the completed books from tracker
+            loadCompletedBooksFromTracker();
+            
+            if (rainCheckbox) {
+                rainCheckbox.addEventListener('change', function() {
+                    toggleSound(rainAudio, this.checked, rainVolume.value);
+                });
+            }
+            
+            if (rainforestCheckbox) {
+                rainforestCheckbox.addEventListener('change', function() {
+                    toggleSound(rainforestAudio, this.checked, rainforestVolume.value);
+                });
+            }
+            
+            if (fireplaceCheckbox) {
+                fireplaceCheckbox.addEventListener('change', function() {
+                    toggleSound(fireplaceAudio, this.checked, fireplaceVolume.value);
+                });
+            }
+            
+            if (rainVolume) {
+                rainVolume.addEventListener('input', function() {
+                    if (rainCheckbox && rainCheckbox.checked) {
+                        rainAudio.volume = this.value / 100;
+                    }
+                });
+            }
+            
+            if (rainforestVolume) {
+                rainforestVolume.addEventListener('input', function() {
+                    if (rainforestCheckbox && rainforestCheckbox.checked) {
+                        rainforestAudio.volume = this.value / 100;
+                    }
+                });
+            }
+            
+            if (fireplaceVolume) {
+                fireplaceVolume.addEventListener('input', function() {
+                    if (fireplaceCheckbox && fireplaceCheckbox.checked) {
+                        fireplaceAudio.volume = this.value / 100;
+                    }
+                });
+            }
+            
+            // Sound presets
+            if (stopAllBtn) {
+                stopAllBtn.addEventListener('click', function() {
+                    if (rainCheckbox) rainCheckbox.checked = false;
+                    if (rainforestCheckbox) rainforestCheckbox.checked = false;
+                    if (fireplaceCheckbox) fireplaceCheckbox.checked = false;
+                    
+                    rainAudio.pause();
+                    rainforestAudio.pause();
+                    fireplaceAudio.pause();
+                });
+            }
+            
+            if (quietPresetBtn) {
+                quietPresetBtn.addEventListener('click', function() {
+                    if (rainCheckbox) rainCheckbox.checked = true;
+                    if (rainforestCheckbox) rainforestCheckbox.checked = false;
+                    if (fireplaceCheckbox) fireplaceCheckbox.checked = false;
+                    
+                    if (rainVolume) rainVolume.value = 30;
+                    if (rainforestVolume) rainforestVolume.value = 0;
+                    if (fireplaceVolume) fireplaceVolume.value = 0;
+                    
+                    toggleSound(rainAudio, true, 30);
+                    toggleSound(rainforestAudio, false, 0);
+                    toggleSound(fireplaceAudio, false, 0);
+                });
+            }
+            
+            if (cozyPresetBtn) {
+                cozyPresetBtn.addEventListener('click', function() {
+                    if (rainCheckbox) rainCheckbox.checked = true;
+                    if (rainforestCheckbox) rainforestCheckbox.checked = true;
+                    if (fireplaceCheckbox) fireplaceCheckbox.checked = false;
+                    
+                    if (rainVolume) rainVolume.value = 50;
+                    if (rainforestVolume) rainforestVolume.value = 60;
+                    if (fireplaceVolume) fireplaceVolume.value = 0;
+                    
+                    toggleSound(rainAudio, true, 50);
+                    toggleSound(rainforestAudio, true, 60);
+                    toggleSound(fireplaceAudio, false, 0);
+                });
+            }
+            
+            function toggleSound(audio, play, volume) {
+                if (play) {
+                    audio.play().catch(e => console.log('Audio play failed:', e));
+                    audio.volume = volume / 100;
+                } else {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            }
+            
+            function loadCompletedBooksFromTracker() {
+                const savedProgress = JSON.parse(localStorage.getItem('readify_progress') || '[]');
+                const completedList = document.getElementById('completed-list');
+                const completedCount = document.getElementById('completed-count');
+                
+                if (!completedList) return;
+                
+                // Taking only books that are complete
+                const completedBooks = savedProgress.filter(book => {
+                    const percentComplete = Math.round((book.pagesRead / book.totalPages) * 100);
+                    return percentComplete === 100;
+                });
+                
+                completedList.innerHTML = '';
+                
+                if (completedBooks.length === 0) {
+                    completedList.innerHTML = '<p class="empty-message">No completed books yet. Mark books as 100% completed in the Progress Tracker!</p>';
+                    updateStats([]);
+                    if (completedCount) completedCount.textContent = '0 books';
+                    return;
+                }
+                
+                // Sorting by most recently completed
+                completedBooks.sort((a, b) => {
+                    const dateA = a.date ? new Date(a.date) : new Date(a.id);
+                    const dateB = b.date ? new Date(b.date) : new Date(b.id);
+                    return dateB - dateA;
+                });
+                
+                completedBooks.forEach(book => {
+                    const bookElement = document.createElement('div');
+                    bookElement.className = 'completed-book';
+                    
+                    const completionDate = book.date ? new Date(book.date) : new Date(book.id);
+                    const formattedDate = completionDate.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric', 
+                        year: 'numeric' 
+                    });
+                    
+                    // Generate rating (you could save this in tracker too, or use default)
+                    const rating = book.rating || 0; 
+                    
+                    bookElement.innerHTML = `
+                        <div class="completed-book-info">
+                            <h4 class="completed-book-title">${book.title}</h4>
+                            <div class="completed-book-meta">
+                                <span class="pages-tag small">${book.totalPages} pages</span>
+                                <span class="rating-display">${'★'.repeat(rating)}${'☆'.repeat(5-rating)}</span>
+                            </div>
+                        </div>
+                        <div class="completed-book-date">
+                            ${formattedDate}
+                        </div>
+                    `;
+                    
+                    completedList.appendChild(bookElement);
+                });
+                
+                updateStats(completedBooks);
+                if (completedCount) completedCount.textContent = `${completedBooks.length} book${completedBooks.length !== 1 ? 's' : ''}`;
+            }
+            
+            function updateStats(books) {
+                const totalBooks = books.length;
+                const totalPages = books.reduce((sum, book) => sum + (book.totalPages || 0), 0);
+                
+                // Books completed this month
+                const currentMonth = new Date().getMonth();
+                const currentYear = new Date().getFullYear();
+                const monthBooks = books.filter(book => {
+                    const bookDate = book.date ? new Date(book.date) : new Date(book.id);
+                    return bookDate.getMonth() === currentMonth && bookDate.getFullYear() === currentYear;
+                }).length;
+                
+                const totalBooksEl = document.getElementById('total-books');
+                const monthBooksEl = document.getElementById('month-books');
+                const totalPagesEl = document.getElementById('total-pages');
+                
+                if (totalBooksEl) totalBooksEl.textContent = totalBooks;
+                if (monthBooksEl) monthBooksEl.textContent = monthBooks;
+                if (totalPagesEl) totalPagesEl.textContent = totalPages;
+            }
+            
+            // Add this CSS for the completed count badge
+            const style = document.createElement('style');
+            style.textContent = `
+                .completed-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: var(--spacing-lg);
+                }
+                
+                .completed-count {
+                    font-size: 0.875rem;
+                    color: var(--color-primary);
+                    background-color: rgba(139, 69, 19, 0.1);
+                    padding: 0.25rem 0.75rem;
+                    border-radius: var(--radius-md);
+                    font-weight: 500;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

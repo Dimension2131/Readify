@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Explorer - Readify</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/images/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Readify</a>
+            
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explorer.html" class="active">Book Explorer</a></li>
+                <li><a href="tracker.html">Progress Tracker</a></li>
+                <li><a href="recommender.html">Book Recommender</a></li>
+                <li><a href="flow.html">Reading Flow</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="explorer-container">
+        <div class="container">
+            <header class="explorer-header">
+                <h1 class="page-title">Book Explorer</h1>
+                <p class="page-subtitle">Browse our collection of books and find your next read</p>
+            </header>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search by title or author...">
+                    <button class="search-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="filter-group">
+                    <select id="genre-filter">
+                        <option value="">All Genres</option>
+                    </select>
+                    
+                    <select id="author-filter">
+                        <option value="">All Authors</option>
+                    </select>
+                    
+                    <button id="reset-filters" class="btn-secondary">Reset Filters</button>
+                </div>
+            </div>
+
+            <div class="book-grid" id="book-grid">
+            </div>
+        </div>
+    </main>
+
+    <!-- Book Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="book-modal">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-book-cover" id="modal-cover"></div>
+                    <div class="modal-title">
+                        <h2 id="modal-book-title">placeholder</h2>
+                        <h3 id="modal-book-author">placeholder</h3>
+                        <div class="modal-meta">
+                            <span class="modal-genres" id="modal-genre"></span>
+                            <span class="pages-tag" id="modal-pages"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-body">
+                    <section class="synopsis">
+                        <h3>Synopsis</h3>
+                        <p id="modal-synopsis"></p>
+                    </section>
+                    
+                    <section class="series" id="series-section">
+                        <h3>Series Information</h3>
+                        <ul id="series-list"></ul>
+                    </section>
+                    
+                    <section class="reviews">
+                        <h3>Ratings & Reviews</h3>
+                        <table class="reviews-table">
+                            <thead>
+                                <tr>
+                                    <th>Source</th>
+                                    <th>Rating</th>
+                                    <th>Review</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reviews-table">          
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Readify</h3>
+                <p>Makes reading fun for all ages</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="explorer.html">Book Explorer</a></li>
+                    <li><a href="tracker.html">Progress Tracker</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="recommender.html">Book Recommender</a></li>
+                    <li><a href="flow.html">Reading Flow</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Readify. Makes reading fun for all ages</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookGrid = document.getElementById('book-grid');
+            const searchInput = document.getElementById('search-input');
+            const genreFilter = document.getElementById('genre-filter');
+            const authorFilter = document.getElementById('author-filter');
+            const resetButton = document.getElementById('reset-filters');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalClose = document.getElementById('modal-close');
+            
+            // Get all authors for filter
+            const uniqueAuthors = [...new Set(booksData.map(book => book.author))];
+            const authorSelect = document.getElementById('author-filter');
+            const allGenres = [];
+            booksData.forEach(book => {
+                if (book.genres) {
+                    book.genres.forEach(genre => {
+                        if (!allGenres.includes(genre)){
+                            allGenres.push(genre)
+                        }
+                    })
+                }
+            });
+
+            allGenres.sort().forEach(genre => {
+                const option = document.createElement('option');
+                option.value = genre;
+                option.textContent = genre;
+                genreFilter.appendChild(option);
+            });
+
+            uniqueAuthors.forEach(author => {
+                const option = document.createElement('option');
+                option.value = author;
+                option.textContent = author;
+                authorSelect.appendChild(option);
+            });
+            
+            // Book items
+            function renderBooks(books) {
+                bookGrid.innerHTML = '';
+                
+                books.forEach(book => {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'book-card';
+                    bookCard.innerHTML = `
+                        <div class="book-cover">
+                            ${book.image ? 
+                            `<img src="${book.image}" alt="${book.title} cover" loading="lazy">` : 
+                            `<div class="book-cover-placeholder" style="background-color: ${book.color}">
+                                <span>${book.title.substring(0, 2)}</span>
+                                </div>`
+                                }                            
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">${book.title}</h3>
+                            <p class="book-author">${book.author}</p>
+                            <div class="book-meta">
+                                ${book.genres.map(genre => `<span class=genre-tag>${genre}</span>`).join('')}
+                                <span class="pages-tag">${book.pages} pages</span>
+                            </div>
+                            <button class="btn-view-details" data-id="${book.id}">View Details</button>
+                        </div>
+                    `;
+                    
+                    bookGrid.appendChild(bookCard);
+                });
+                
+                document.querySelectorAll('.btn-view-details').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const bookId = parseInt(this.dataset.id);
+                        const book = booksData.find(b => b.id === bookId);
+                        openBookModal(book);
+                    });
+                });
+            }
+            
+            // Book filters
+            function filterBooks() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedGenre = genreFilter.value;
+                const selectedAuthor = authorFilter.value;
+                
+                const filteredBooks = booksData.filter(book => {
+                    const matchesSearch = book.title.toLowerCase().includes(searchTerm) ||
+                                         book.author.toLowerCase().includes(searchTerm);
+                    const matchesGenre = !selectedGenre || book.genres.includes(selectedGenre);
+                    const matchesAuthor = !selectedAuthor || book.author === selectedAuthor;
+                    
+                    return matchesSearch && matchesGenre && matchesAuthor;
+                });
+                
+                renderBooks(filteredBooks);
+            }
+            
+            // Open book modal
+            function openBookModal(book) {
+                document.getElementById('modal-book-title').textContent = book.title;
+                document.getElementById('modal-book-author').textContent = `by ${book.author}`;
+                document.getElementById('modal-genre').innerHTML = book.genres.map(genre => `<span class=genre-tag>${genre}</span>`).join('');
+                document.getElementById('modal-pages').textContent = `${book.pages} pages`;
+                document.getElementById('modal-synopsis').textContent = book.synopsis;
+                
+                const modalCover = document.getElementById('modal-cover');
+                modalCover.style.backgroundColor = book.color;
+                modalCover.innerHTML = book.image ? 
+                `<img src="${book.image}" alt="${book.title} cover">` :
+                `<div class="modal-cover-placeholder" style="background-color: ${book.color}">
+                <span>${book.title.substring(0, 2)}</span> </div>`;
+                
+                const seriesSection = document.getElementById('series-section');
+                const seriesList = document.getElementById('series-list');
+                
+                if (book.series && book.series.length > 0) {
+                    seriesSection.style.display = 'block';
+                    seriesList.innerHTML = '';
+                    
+                    book.series.forEach(seriesBook => {
+                        const li = document.createElement('li');
+                        li.textContent = `${seriesBook.title} (${seriesBook.type})`;
+                        seriesList.appendChild(li);
+                    });
+                } else {
+                    seriesSection.style.display = 'none';
+                }
+
+                const reviewsTable = document.getElementById('reviews-table');
+                reviewsTable.innerHTML = '';
+                
+                book.reviews.forEach(review => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${review.source}</td>
+                        <td><span class="rating">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</span></td>
+                        <td>${review.comment}</td>
+                    `;
+                    reviewsTable.appendChild(row);
+                });
+                
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            searchInput.addEventListener('input', filterBooks);
+            genreFilter.addEventListener('change', filterBooks);
+            authorFilter.addEventListener('change', filterBooks);
+            resetButton.addEventListener('click', function() {
+                searchInput.value = '';
+                genreFilter.value = '';
+                authorFilter.value = '';
+                filterBooks();
+            });
+            
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+            
+            renderBooks(booksData);
+            document.querySelector('.search-btn').addEventListener('click', filterBooks);
+        });
+    </script>
+</body>
+</html>

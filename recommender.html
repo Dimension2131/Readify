@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender - Readify</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/images/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Readify</a>
+            
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explorer.html">Book Explorer</a></li>
+                <li><a href="tracker.html">Progress Tracker</a></li>
+                <li><a href="recommender.html" class="active">Book Recommender</a></li>
+                <li><a href="flow.html">Reading Flow</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="recommender-container">
+        <div class="container">
+            <header class="recommender-header">
+                <h1 class="page-title">Book Recommender</h1>
+                <p class="page-subtitle">Let us help you find your next favorite book</p>
+            </header>
+
+            <div class="recommender-grid">
+                <!-- Filters -->
+                <div class="recommender-card filters-card">
+                    <h2 class="card-title">Preferences</h2>
+                    
+                    <div class="filters-form">
+                        <div class="form-group">
+                            <label for="genre-select">Genre</label>
+                            <select id="genre-select">
+                                <option value="">Any Genre</option>
+                                <option value="action">Action</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="reincarnation">Reincarnation</option>
+                                <option value="martial arts">Martial Arts</option>
+                                <option value="isekai">Isekai</option>
+                                <option value="dungeon">Dungeon</option>
+                                <option value="regression">Regression</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="length-select">Book Length</label>
+                            <select id="length-select">
+                                <option value="">Any Length</option>
+                                <option value="short">Short (Under 180 pages)</option>
+                                <option value="medium">Medium (180-220 pages)</option>
+                                <option value="long">Long (Over 220 pages)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mood-select">Reading Mood</label>
+                            <select id="mood-select">
+                                <option value="">Any Mood</option>
+                                <option value="action-packed">Action-Packed</option>
+                                <option value="strategic">Strategic & Smart</option>
+                                <option value="emotional">Emotional & Deep</option>
+                                <option value="comedy">Funny & Light</option>
+                                <option value="revenge">Revenge & Dark</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn-primary" id="recommend-btn">Recommend a Book</button>
+                        <button class="btn-secondary" id="random-btn">Surprise Me!</button>
+                    </div>
+                </div>
+
+                <!-- Recommendation -->
+                <div class="recommender-card recommendation-card">
+                    <div class="recommendation-header">
+                        <h2 class="card-title">Your Recommendation</h2>
+                        <div class="recommendation-actions">
+                            <button class="btn-icon" id="save-recommendation" title="Save to reading list">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path> <!--Bookmark/Save Icon-->
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-content" id="recommendation-content">
+                        <div class="empty-recommendation">
+                            <div class="empty-icon">📚</div>
+                            <h3>No Recommendation Yet</h3>
+                            <p>Set your preferences and click "Recommend a Book" to get started!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-footer">
+                        <button class="btn-primary" id="pick-again-btn" disabled>
+                            <span class="btn-text">Pick Another</span>
+                            <span class="btn-icon">↻</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reading List -->
+                <div class="recommender-card reading-list-card">
+                    <div class="reading-list-header">
+                        <h2 class="card-title">My Reading List</h2>
+                        <button class="btn-small" id="clear-list">Clear All</button>
+                    </div>
+                    
+                    <div class="reading-list" id="reading-list">
+                        <p class="empty-message">Your reading list is empty. Save recommendations to build your list!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Readify</h3>
+                <p>Makes reading fun for all ages</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="explorer.html">Book Explorer</a></li>
+                    <li><a href="tracker.html">Progress Tracker</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="recommender.html">Book Recommender</a></li>
+                    <li><a href="flow.html">Reading Flow</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Readify. Makes reading fun for all ages</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const recommendBtn = document.getElementById('recommend-btn');
+            const randomBtn = document.getElementById('random-btn');
+            const pickAgainBtn = document.getElementById('pick-again-btn');
+            const saveBtn = document.getElementById('save-recommendation');
+            const clearBtn = document.getElementById('clear-list');
+            const recommendationContent = document.getElementById('recommendation-content');
+            const readingListContainer = document.getElementById('reading-list');
+            
+            let currentRecommendation = null;
+            loadReadingList();
+            
+            recommendBtn.addEventListener('click', function() {
+                recommendBook();
+            });
+            
+            randomBtn.addEventListener('click', function() {
+                recommendRandomBook();
+            });
+            
+            pickAgainBtn.addEventListener('click', function() {
+                if (pickAgainBtn.disabled) return;
+                
+                pickAgainBtn.classList.add('spinning');
+                
+                setTimeout(() => {
+                    pickAgainBtn.classList.remove('spinning');
+                    recommendBook();
+                }, 500);
+            });
+            
+            // Saving a recommendation
+            saveBtn.addEventListener('click', function() {
+                if (!currentRecommendation) return;
+                
+                saveToReadingList(currentRecommendation);
+                
+                saveBtn.classList.add('saved');
+                setTimeout(() => {
+                    saveBtn.classList.remove('saved');
+                }, 1000);
+            });
+            
+            // Clear reading list confirmation
+            clearBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear your reading list?')) {
+                    localStorage.removeItem('readify_reading_list');
+                    loadReadingList();
+                }
+            });
+            
+            function recommendBook() {
+                const genre = document.getElementById('genre-select').value;
+                const length = document.getElementById('length-select').value;
+                const mood = document.getElementById('mood-select').value;
+                
+                // Filter books based on criteria
+                let filteredBooks = booksData;
+                
+                if (genre) {
+                    filteredBooks = filteredBooks.filter(book => 
+                        book.genres && book.genres.includes(genre)
+                    );
+                }
+                
+                if (length) {
+                    filteredBooks = filteredBooks.filter(book => {
+                        if (length === 'short') return book.pages < 180;
+                        if (length === 'medium') return book.pages >= 180 && book.pages <= 220;
+                        if (length === 'long') return book.pages > 220;
+                        return true;
+                    });
+                }
+                
+                if (mood) {
+                    // Mood matching based on your new data
+                    filteredBooks = filteredBooks.filter(book => {
+                        const tags = book.tags || [];
+                        const genres = book.genres || [];
+                        
+                        if (mood === 'action-packed') {
+                            return genres.includes('action') || 
+                                   tags.includes('action') || 
+                                   tags.includes('overpowered') ||
+                                   tags.includes('dragons') ||
+                                   tags.includes('murim');
+                        }
+                        if (mood === 'strategic') {
+                            return tags.includes('strategy') || 
+                                   tags.includes('world-building') ||
+                                   book.title.includes('Omniscient') ||
+                                   book.title.includes('Gacha');
+                        }
+                        if (mood === 'emotional') {
+                            return tags.includes('emotional') || 
+                                   tags.includes('drama') ||
+                                   tags.includes('trauma') ||
+                                   tags.includes('philosophy') ||
+                                   book.title.includes('Boxer');
+                        }
+                        if (mood === 'comedy') {
+                            return genres.includes('comedy') || 
+                                   tags.includes('comedy') ||
+                                   book.title.includes('Crazy Demon') ||
+                                   book.title.includes('Estate Developer') ||
+                                   book.title.includes('Mount Hua');
+                        }
+                        if (mood === 'revenge') {
+                            return genres.includes('revenge') || 
+                                   tags.includes('revenge') ||
+                                   book.title.includes('Revenge') ||
+                                   book.title.includes('Baskerville') ||
+                                   book.title.includes('Northern Blade');
+                        }
+                        return true;
+                    });
+                }
+                
+                if (filteredBooks.length === 0) {
+                    showNoResults();
+                    return;
+                }
+                
+                // Pick random book from filtered list
+                const randomIndex = Math.floor(Math.random() * filteredBooks.length);
+                const book = filteredBooks[randomIndex];
+                
+                showRecommendation(book);
+                currentRecommendation = book;
+            }
+            
+            function recommendRandomBook() {
+                const randomIndex = Math.floor(Math.random() * booksData.length);
+                const book = booksData[randomIndex];
+                
+                showRecommendation(book);
+                currentRecommendation = book;
+            }
+            
+            function showRecommendation(book) {
+                const html = `
+                    <div class="recommended-book">
+                        <div class="recommended-book-cover">
+                            ${book.image ? 
+                                `<img src="${book.image}" alt="${book.title} cover" loading="lazy">` :
+                                `<div class="recommended-cover-placeholder" style="background-color: ${book.color}">
+                                    <span>${book.title.substring(0, 2)}</span>
+                                </div>`
+                            }
+                        </div>
+                        <div class="recommended-book-info">
+                            <h3 class="recommended-book-title">${book.title}</h3>
+                            <p class="recommended-book-author">by ${book.author}</p>
+                            
+                            <div class="recommended-book-meta">
+                                ${book.genres.map(genre => `<span class="genre-tag">${genre}</span>`).join('')}
+                                <span class="pages-tag">${book.pages} pages</span>
+                                <span class="rating-tag">${book.rating}/5 ★</span>
+                            </div>
+                            
+                            <p class="recommended-book-synopsis">${book.synopsis.substring(0, 200)}...</p>
+                            
+                            <div class="recommended-book-tags">
+                                ${(book.tags || []).map(tag => `<span class="book-tag">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                recommendationContent.innerHTML = html;
+                pickAgainBtn.disabled = false;
+            }
+            
+            function showNoResults() {
+                const html = `
+                    <div class="empty-recommendation">
+                        <div class="empty-icon">🔍</div>
+                        <h3>No Books Found</h3>
+                        <p>Try adjusting your filters to get more recommendations.</p>
+                    </div>
+                `;
+                
+                recommendationContent.innerHTML = html;
+                pickAgainBtn.disabled = true;
+                currentRecommendation = null;
+            }
+            
+            function saveToReadingList(book) {
+                let readingList = JSON.parse(localStorage.getItem('readify_reading_list') || '[]');
+                
+                // Check if book is already in list
+                const exists = readingList.some(item => item.id === book.id);
+                
+                if (!exists) {
+                    readingList.push({
+                        id: book.id,
+                        title: book.title,
+                        author: book.author,
+                        genres: book.genres,
+                        pages: book.pages,
+                        image: book.image,
+                        dateAdded: new Date().toISOString()
+                    });
+                    
+                    localStorage.setItem('readify_reading_list', JSON.stringify(readingList));
+                    loadReadingList();
+                } else {
+                    alert('This book is already in your reading list!');
+                }
+            }
+            
+            function loadReadingList() {
+                const readingList = JSON.parse(localStorage.getItem('readify_reading_list') || '[]');
+                readingListContainer.innerHTML = '';
+                
+                if (readingList.length === 0) {
+                    readingListContainer.innerHTML = '<p class="empty-message">Your reading list is empty. Save recommendations to build your list!</p>';
+                    return;
+                }
+                
+                readingList.forEach((item, index) => {
+                    const bookElement = document.createElement('div');
+                    bookElement.className = 'reading-list-item';
+                    bookElement.innerHTML = `
+                        <div class="reading-list-item-number">${index + 1}</div>
+                        <div class="reading-list-item-info">
+                            <h4 class="reading-list-item-title">${item.title}</h4>
+                            <p class="reading-list-item-author">${item.author}</p>
+                            <div class="reading-list-item-meta">
+                                ${item.genres ? item.genres.map(genre => 
+                                    `<span class="genre-tag small">${genre}</span>`
+                                ).join('') : ''}
+                                <span class="pages-tag small">${item.pages} pages</span>
+                            </div>
+                        </div>
+                        <button class="btn-icon remove-btn" data-id="${item.id}" title="Remove from list">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    `;
+                    
+                    readingListContainer.appendChild(bookElement);
+                });
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        removeFromReadingList(id);
+                    });
+                });
+            }
+            
+            function removeFromReadingList(id) {
+                let readingList = JSON.parse(localStorage.getItem('readify_reading_list') || '[]');
+                readingList = readingList.filter(item => item.id !== id);
+                
+                localStorage.setItem('readify_reading_list', JSON.stringify(readingList));
+                loadReadingList();
+            }
+            
+            // Initial random recommendation
+            recommendRandomBook();
+        });
+    </script>
+</body>
+</html>

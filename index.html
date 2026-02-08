@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readify - Makes reading fun for all ages</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/images/favicon.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Readify</a>
+            
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="explorer.html">Book Explorer</a></li>
+                <li><a href="tracker.html">Progress Tracker</a></li>
+                <li><a href="recommender.html">Book Recommender</a></li>
+                <li><a href="flow.html">Reading Flow</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="quote-section">
+                <div class="quote-container">
+                    <h2 class="quote-title">Inspiration for Today</h2>
+                    <div class="quote-slider">
+                        <div class="quote active">
+                            <p>"A reader lives a thousand lives before he dies. The man who never reads lives only one."</p>
+                            <cite>- George R.R. Martin</cite>
+                        </div>
+                        <div class="quote">
+                            <p>"There is no friend as loyal as a book."</p>
+                            <cite>– Ernest Hemingway</cite>
+                        </div>
+                        <div class="quote">
+                            <p>"The more that you read, the more things you will know. The more that you learn, the more places you'll go."</p>
+                            <cite>– Dr. Seuss</cite>
+                        </div>
+                        <div class="quote">
+                            <p>"Books are a uniquely portable magic."</p>
+                            <cite>– Stephen King</cite>
+                        </div>
+                    </div>
+                    <div class="quote-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                        <span class="dot" data-index="3"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="image-placeholder">
+                    <div class="book-stack">
+                        <div class="book"></div>
+                        <div class="book"></div>
+                        <div class="book"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author of the Day -->
+    <section class="author-section">
+        <div class="container">
+            <h2 class="section-title">Author of the Day</h2>
+            <div class="author-card">
+                <div class="author-image" id="author-image">
+                </div>
+                <div class="author-info">
+                    <h3 id="author-name">Loading...</h3>
+                    <p id="author-bio"></p>
+                    <div class="author-meta">
+                        <span class="genre-tag" id="author-genre"></span>
+                        <span class="date-tag" id="current-date"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="section-title">Stay Updated</h2>
+            <p class="section-subtitle">Subscribe to our newsletter</p>
+            
+            <form class="newsletter-form" id="newsletter-form">
+                <div class="form-group">
+                    <input type="email" id="newsletter-email" placeholder="Your email address" required>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </div>
+                <div class="form-message" id="form-message"></div>
+                <p class="form-note">Unsubscribe at any time.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Readify</h3>
+                <p>Makes reading fun for all ages</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="explorer.html">Book Explorer</a></li>
+                    <li><a href="tracker.html">Progress Tracker</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="recommender.html">Book Recommender</a></li>
+                    <li><a href="flow.html">Reading Flow</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Readify. Makes reading fun for all ages</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize homepage specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quote rotation
+            const quotes = document.querySelectorAll('.quote');
+            const dots = document.querySelectorAll('.dot');
+            let currentQuote = 0;
+            
+            function rotateQuote() {
+                quotes[currentQuote].classList.remove('active');
+                dots[currentQuote].classList.remove('active');
+                
+                currentQuote = (currentQuote + 1) % quotes.length;
+                
+                quotes[currentQuote].classList.add('active');
+                dots[currentQuote].classList.add('active');
+            }
+            
+            // Rotate quotes every 5 seconds
+            setInterval(rotateQuote, 5000);
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    
+                    quotes[currentQuote].classList.remove('active');
+                    dots[currentQuote].classList.remove('active');
+                    
+                    currentQuote = index;
+                    
+                    quotes[currentQuote].classList.add('active');
+                    dots[currentQuote].classList.add('active');
+                });
+            });
+            
+            // Author of the day based on date
+            const authors = [
+                {
+                    name: "Jane Austen",
+                    bio: "English novelist known primarily for her six major novels, which interpret, critique and comment upon the British landed gentry at the end of the 18th century.",
+                    genre: "Classic Romance",
+                    color: "#8B4513"
+                },
+                {
+                    name: "George Orwell",
+                    bio: "English novelist, essayist, journalist and critic whose work is marked by lucid prose, awareness of social injustice, opposition to totalitarianism, and outspoken support of democratic socialism.",
+                    genre: "Political Fiction",
+                    color: "#2F4F4F"
+                },
+                {
+                    name: "Toni Morrison",
+                    bio: "American novelist, essayist, book editor, and college professor who received the Nobel Prize in Literature in 1993 for her novel 'Beloved'.",
+                    genre: "Literary Fiction",
+                    color: "#8B0000"
+                },
+                {
+                    name: "J.K. Rowling",
+                    bio: "British author and philanthropist best known for writing the Harry Potter fantasy series which has sold over 500 million copies worldwide.",
+                    genre: "Fantasy",
+                    color: "#4B0082"
+                },
+                {
+                    name: "Haruki Murakami",
+                    bio: "Japanese writer whose novels, essays, and short stories have been bestsellers in Japan and internationally, translated into 50 languages.",
+                    genre: "Magical Realism",
+                    color: "#006400"
+                },
+                {
+                    name: "Agatha Christie",
+                    bio: "English writer known for her 66 detective novels and 14 short story collections, particularly those revolving around fictional detectives Hercule Poirot and Miss Marple.",
+                    genre: "Mystery",
+                    color: "#696969"
+                },
+                {
+                    name: "Gabriel García Márquez",
+                    bio: "Colombian novelist, short-story writer, screenwriter and journalist, known affectionately as Gabo, considered one of the most significant authors of the 20th century.",
+                    genre: "Magical Realism",
+                    color: "#8B4513"
+                }
+            ];
+            
+            const today = new Date().getDay();
+            const author = authors[today % authors.length];
+            
+            document.getElementById('author-name').textContent = author.name;
+            document.getElementById('author-bio').textContent = author.bio;
+            document.getElementById('author-genre').textContent = author.genre;
+            document.getElementById('author-image').style.backgroundColor = author.color;
+            document.getElementById('author-image').innerHTML = `<span>${author.name.charAt(0)}</span>`;
+            
+            // Current date display
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', options);
+            
+            // Newsletter form
+            const newsletterForm = document.getElementById('newsletter-form');
+            const formMessage = document.getElementById('form-message');
+            
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('newsletter-email').value;
+                
+                if (validateEmail(email)) {
+                    // Save to localStorage
+                    let subscribers = JSON.parse(localStorage.getItem('readify_subscribers') || '[]');
+                    subscribers.push({
+                        email: email,
+                        date: new Date().toISOString()
+                    });
+                    localStorage.setItem('readify_subscribers', JSON.stringify(subscribers));
+                    
+                    formMessage.textContent = 'Thank you for subscribing!';
+                    formMessage.className = 'form-message success';
+
+                    newsletterForm.reset();
+                    
+                    setTimeout(() => {
+                        formMessage.textContent = '';
+                        formMessage.className = 'form-message';
+                    }, 5000);
+                } else {
+                    formMessage.textContent = 'Please enter a valid email address.';
+                    formMessage.className = 'form-message error';
+                }
+            });
+            
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+        });
+    </script>
+</body>
+</html>
