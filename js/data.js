@@ -7,7 +7,7 @@ const booksData = [
         pages: 197,
         rating: 4.8,
         color: "#8B4513",
-        image: "../assets/images/1.png",
+        image: "./assets/images/1.png",
         synopsis: "Jin Runcandel was the youngest son of Runcandel, the land's most prestigious swordsman family... And the biggest failure in Runcandel history.He, who was kicked out miserably and came to a meaningless end, was given another chance.'How do you want to use this power?' 'I want to use it for myself.'Memories of his past life, overwhelming talent, and a contract with God... The preparations to become the greatest are complete.",
         series: [],
         reviews: [
@@ -341,4 +341,5 @@ const booksData = [
         tags: ["isekai", "engineering", "comedy"]
     }
         
+
 ];
